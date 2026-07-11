@@ -1,0 +1,28 @@
+[Unit]
+Description=Postfix OAuth2 token daemon
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=postfix-oauth2
+Group=postfix-oauth2
+
+ExecStart=/opt/postfix-oauth2/venv/bin/python /opt/postfix-oauth2/token_daemon.py
+Restart=on-failure
+RestartSec=10
+StartLimitIntervalSec=300
+StartLimitBurst=10
+
+WorkingDirectory=/opt/postfix-oauth2
+
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+
+ReadOnlyPaths=/etc/postfix-oauth2
+ReadWritePaths=/etc/postfix/oauth2
+
+[Install]
+WantedBy=multi-user.target
