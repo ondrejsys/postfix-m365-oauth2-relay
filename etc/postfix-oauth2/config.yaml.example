@@ -1,0 +1,13 @@
+check_interval: 60
+refresh_before_expiry: 600
+
+applications:
+  - name: m365-primary
+    tenant_id: "<TENANT-ID>"
+    client_id: "<CLIENT-ID>"
+    client_secret_file: "/etc/postfix-oauth2/secrets/m365-primary.secret"
+    scope: "https://outlook.office365.com/.default"
+
+    mailboxes:
+      - user: "smtp@example.com"
+        token_file: "/etc/postfix/oauth2/smtp@example.com"
